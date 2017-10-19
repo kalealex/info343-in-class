@@ -51,7 +51,20 @@ let state = {
 //to the page as new <tr> and <td> elements within the
 //<tbody> element that is already in the page.
 
-
+let tableBody = document.querySelector("tbody");
+// tableBody.innerText = "Hello World"; // can add text to selected HTML element
+let tableRow = document.createElement("tr"); // can create elements...
+let tableData1 = document.createElement("td");
+let tableData2 = document.createElement("td");
+let tableData3 = document.createElement("td");
+tableData1.innerText = "Darth";
+tableData2.innerText = "M";
+tableData3.innerText = "1";
+tableBody.appendChild(tableData1); // and add elements to our selected HTML element
+tableBody.appendChild(tableData2);
+tableBody.appendChild(tableData3);
+tableBody.appendChild(tableRow);
+console.log(tableBody);
 
 
 //TODO: listen for the "click" event raised by the 

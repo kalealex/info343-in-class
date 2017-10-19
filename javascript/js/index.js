@@ -53,14 +53,14 @@ The primitive data types include:
 
 //TODO: declare a new variable named `x`
 //and initialize it to a literal string
-
+let x = 'this is a literal string';
 
 //the `console` object represents the developer
 //tools console, or the terminal if you run this
 //under Node.js. The `.log()` method writes the 
 //value of an expression to the console.
 //TODO: write `x` to the console
-
+console.log('var x = ' + x);
 
 //if you don't initialize a new variable
 //it's value is `undefined`
@@ -79,7 +79,7 @@ if (temp > 0) {
 }
 //what do you think the value of `temp` is after the if block?
 //use console.log() to find out!
-
+console.log('temp = ' + temp);
 
 let temp2 = 5;
 if (temp2 > 0) {
@@ -88,10 +88,11 @@ if (temp2 > 0) {
 }
 //what do you think the value of `temp2` is after the if block?
 //use console.log() to find out!
-
+console.log('temp2 = ' + temp2);
 
 //moral of the story: use `let` instead of `var`
-
+//let "lets us stay at the block level"
+//scope is restricted to the block where the variable is declared
 
 /* ARRAYS
 
@@ -104,31 +105,35 @@ To create a zero-length array, just use `[]`.
 */
 //TODO: declare a variable named `emptyArray`
 //and set it equal to an empty array
+let emptyArray = [];
 
 //TODO: declare a variable named `nums`
 //and set it equal to an array of numbers
 //containing 10,11,12,13,14
-
-
+let nums = [10,11,12,13,14];
+let junk = ["name",10,null, undefined,{}]; //arrays can contain a variety of types
 //the `.length` property returns 
 //the number of elements in the array
 //TODO: write the length of `nums` to the console
-
+console.log(nums.length);
 
 //you can add elements to the end of an array 
 //using the build-in .push() method
 //TODO: add the number 15 to the end of the `nums` array
-
+nums.push(15);
+console.log(nums);
 
 //TODO: create a new variable named `courses`
 //that is initialized to an array of strings,
 //one for each course name you are currently 
 //taking (e.g., "INFO 343"), 
 //and write that to the console
-
+let courses = ["INSC 500", "INSC 570", "INSC 599"];
+courses.push("INFO 343");
 
 //TODO: write the last element in the array to the console
-
+console.log(courses[0]);
+console.log(courses[courses.length-1]);
 
 /* FOR LOOPS
 For loops work exactly like they do in Java,
@@ -147,7 +152,13 @@ between 0 and 49. Write the populated
 array to the console to make sure you
 did it right.
 */
-
+let evenNum = [];
+for (let i = 0; i < 50; i++) {
+    if (i % 2 == 0) {
+        evenNum.push(i);
+    }
+}
+console.log(evenNum);
 
 /* OBJECTS
 
@@ -168,7 +179,7 @@ use `{}`.
 
 //TODO: declare a new variable named `emptyObject`
 //and set it equal to an empty object
-
+let emptyObject = {};
 
 //TODO: declare a new variable named `player`
 //and set it to an object with the following properties:
@@ -176,12 +187,18 @@ use `{}`.
 // lastName = "Rodriguez"
 // totalPoints = 4
 // level = 0
-
+let player = {
+    firstName: "Benny",
+    nickName: "The Jet",
+    lastName: "Rodriguez",
+    totalPoints: 4,
+    level: 0
+}
 
 //you can get the value for a key using
 //the familiar `.` syntax
 //TODO: write the firstName and lastName properties to the console
-
+console.log(player.firstName);
 
 //you can also get the value for a key
 //using an array-like syntax, which can
@@ -189,7 +206,7 @@ use `{}`.
 //TODO: get the lastName property using the 
 //array-like syntax, using a variable set to "lastName"
 //as the expression
-
+console.log(player["lastName"]);
 
 //these key/value pairs are often called "properties"
 //because the syntax looks a lot like property 
@@ -197,17 +214,22 @@ use `{}`.
 //or removed at any time.
 //TODO: add a new `email` property set to "mary@example.com"
 //and write that to the console
+player.email = "benny@thejet.com";
+console.log(player.firstName, player.email);
 
 //accessing a key that doesn't exist yet
 //returns `undefined` (no error)
 //TODO: write the value of the `phone` property to the console
 //(doesn't exist, so it should just write "undefined", with no error)
-
+console.log(player.phone);
 
 //you can iterate over all keys/values using
 //the for...in syntax
 console.group("keys/values from player using for...in");
 //TODO: iterate over all keys/values using for...in
+for (let prop in player) {
+    console.log(prop, player[prop])
+}
 console.groupEnd();
 
 //or you can get the keys as an array using Object.keys()
@@ -215,6 +237,9 @@ console.groupEnd();
 console.group("keys/values from player using Object.keys()");
 //TODO: use Object.keys(player) to get an array with all the
 //keys, and then iterate that using a standard for loop
+for (let i = 0; i < Object.keys(player).length; i++) {
+    console.log(Object.keys(player)[i], player[Object.keys(player)[i]]);
+}
 console.groupEnd();
 
 //TODO: reset your `courses` variable defined
@@ -226,12 +251,28 @@ console.groupEnd();
 //          or omit if there is no section letter
 // - teachers: an array containing the names of your teacher and TA(s)
 //          for that course
-
+let myCourses = [
+    {name: "INFO 343",
+    section: "C",
+    instructors: ["Jacob", "John"]
+    },
+    {name: "INSC 500",
+    section: "A",
+    instructors: ["Adam"]
+    },
+    {name: "INSC 570",
+    section: "A",
+    instructors: ["Alexis"]
+    },
+    {name: "INSC 599",
+    section: "",
+    instructors: ["Jessica"]
+    }
+];
 
 //TODO: write the first teacher name from the 
 //last course in the `courses` array to the console
-
-
+console.log(myCourses[myCourses.length-1].instructors[0]);
 
 /* FUNCTIONS
 JavaScript functions look similar to Java
@@ -258,7 +299,7 @@ function getGreeting(thePlayer) {
 }
 //TODO: call getGreeting() passing your `player` variable
 //and write the return value to the console
-
+console.log(getGreeting(player));
 
 //TODO: change the getGreeting() function above
 //to include the player's last name as well as first name,
@@ -281,6 +322,9 @@ function getGreeting(thePlayer) {
  */
 function levelUp(thePlayer) {
     //TODO: implement this function
+    thePlayer.level++;
+    thePlayer.totalPoints += Math.ceil(thePlayer.totalPoints * (0.1 * thePlayer.level));
+    return thePlayer;
 }
 
 //create a new player
@@ -308,7 +352,11 @@ console.log("points after leveling-up: %d", levelUp(player2).totalPoints);
  */
 function randomIntegers(amount, max) {
     //TODO: implement this function according to the comments above
-
+    let num = [];
+    for (let i = 0; i < amount; i++) {
+        num.push(Math.round(Math.random() * max));
+    }
+    return num;
 }
 
 let randomNums = randomIntegers(10, 100);
@@ -321,7 +369,13 @@ console.log("random integers:", randomNums);
  */
 function max(arrayOfNumbers) {
     //TODO: implement this function according to the comments above
-
+    let max = 0;
+    for (let i = 0; i < arrayOfNumbers.length; i++) {
+        if (arrayOfNumbers[i] > max) {
+            max = arrayOfNumbers[i];
+        }
+    }
+    return max;
 }
 
 console.log("the maximum value in %o is %d", randomNums, max(randomNums));
@@ -335,6 +389,13 @@ console.log("the maximum value in %o is %d", randomNums, max(randomNums));
  */
 function reverseArray(input) {
     //TODO: implement this function according to the comments    
+    // let output = [];
+    // for (let i = input.length - 1; i >= 0; i--) {
+    //     output[(input.length - 1) - i] = input[i];
+    //     //OR output.push(input[i]); 
+    // }
+    let output = input.reverse();
+    return output;
 }
 
 console.log("random integers reversed:", reverseArray(randomNums));
@@ -357,7 +418,8 @@ it doesn't put anything in between the elements.
 //TODO: use .split() and .join() to reverse this string
 //remember that you already have a reverseArray() function
 let stringToReverse = "stressed";
-
+let reverseString = reverseArray(stringToReverse.split("")).join("");
+console.log(stringToReverse + " reversed is " + reverseString);
 
 /* FUNCTIONS CALLING FUNCTIONS */
 
@@ -368,7 +430,7 @@ let stringToReverse = "stressed";
  */
 function negate(num) {
     //TODO: implement this function
-    
+    return - num;
 }
 
 /**
@@ -380,7 +442,11 @@ function negate(num) {
  */
 function negateArray(arrayOfNumbers) {
     //TODO: implement this function
-
+    let negatedArray = [];
+    for (let i = 0; i < arrayOfNumbers.length; i++) {
+        negatedArray[i] = negate(arrayOfNumbers[i]);
+    }
+    return negatedArray;
 }
 
 console.log("negated random integers:", negateArray(randomIntegers(10,100)));
@@ -417,6 +483,7 @@ if the two values are not the same type.
 function min(n1, n2) {
     //TODO: use the ? : ternary operator to return the
     //smaller number in just one line of code
+    return n1 < n2 ? n1 : n2;
 }
 console.log("min(2,1):", min(2,1));
 
@@ -440,17 +507,17 @@ provide a function that compares two elements.
  */
 function compareNums(n1, n2) {
     //TODO: implement this function
-    
+    return n1 - n2;
 }
 
 console.log("compareNums(1,2):", compareNums(1,2));
 console.log("compareNums(1,1):", compareNums(1,1));
-console.log("compareNums(2,1):", compareNums(1,2));
+console.log("compareNums(2,1):", compareNums(2,1)); // this line was wrong in the original file
 
 //some numbers to sort
 let numsToSort = [20,1,14,2,21,10,12,11];
 console.log("numbers sorted alphabetically:", numsToSort.sort());
-//console.log("numbers sorted numerically:", //...TODO:...);
+console.log("numbers sorted numerically:", numsToSort.sort(compareNums));
 
 //if you don't need to define the function separately with a name,
 //you can alternatively provide an in-line _function value_
