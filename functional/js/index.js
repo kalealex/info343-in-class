@@ -256,10 +256,13 @@ function countNames(nameMap, record) {
 //an object containing all the distinct names 
 //as keys, with values representing the number of
 //times that name appeared in the array.
+let nameCounts = {}; //not sure what I'm doing wrong here
+BABYNAMES.reduce(countNames,nameCounts);
 
 //TODO: use Object.keys() to get all of the distinct
 //names as an array of strings
-
+let nameArray = Object.keys(nameCounts);
+console.log(nameArray);
 
 //TODO: filter that array of keys so that you end
 //up with only the names that appeared twice,
