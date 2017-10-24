@@ -256,8 +256,9 @@ function countNames(nameMap, record) {
 //an object containing all the distinct names 
 //as keys, with values representing the number of
 //times that name appeared in the array.
-let nameCounts = {}; //not sure what I'm doing wrong here
-BABYNAMES.reduce(countNames,nameCounts);
+
+//not sure what I'm doing wrong here
+BABYNAMES.reduce(countNames(nameMap, record));
 
 //TODO: use Object.keys() to get all of the distinct
 //names as an array of strings
