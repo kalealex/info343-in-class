@@ -22,8 +22,8 @@ class Task {
         }
 
         li.addEventListener("click", () => { // lambda functions
-            this.done = !this.done; // are these two lines redundant?
-            li.classList.toggle("done");
+            this.done = !this.done; // change the object in memory
+            li.classList.toggle("done"); // change the ui
         })
         return li;
     }
