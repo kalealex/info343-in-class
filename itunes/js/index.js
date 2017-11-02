@@ -48,6 +48,32 @@ function handleError(err) {
  */
 function renderResults(data) {
     //TODO: implement this
+    console.log(data);
+    // clear out results div
+    RESULTS_DIV.textContent = "";
+    // get track info and push to page
+    data.results.forEach((track) => {
+        let img = document.createElement("img");
+        img.src = track.artworkUrl100;
+        img.alt = track.trackName;
+        img.title = track.trackName; // 'title' is a mouseover label
+        RESULTS_DIV.appendChild(img);
+
+        img.addEventListener("click", () => {
+            if (preview.src === track.previewUrl) {
+                // this has been clicked before: pause or un-pause
+                if (preview.paused) {
+                    preview.play();
+                } else {
+                    preview.pause();
+                }
+            } else {
+                // clicked on a new track: reset the audio source and play the track
+                preview.src = track.previewUrl;
+                preview.play();
+            }
+        })
+    });
 }
 
 //TODO: listen for the "submit" event
@@ -56,3 +82,15 @@ function renderResults(data) {
 //and use fetch() to search iTunes for tracks
 //matching the term the user entered in the
 //<input> element within the form.
+document.querySelector("#search-form") //could make this a constant
+    .addEventListener("submit", function(event) {
+        event.preventDefault();
+        // 'this' refers to the element that raised the event, which in this case is the <form> element
+        let term = this.querySelector("input").value;
+        console.log("serching for %s", term);
+
+        fetch(SEARCH_API + term)
+            .then(handleResponse)
+            .then(renderResults)
+            .catch(handleError);
+    });
