@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 import firebase from "firebase/app"
@@ -8,7 +8,7 @@ import NewTaskForm from "./components/NewTaskForm";
 //TaskList
 //PurgeButton
 
-class App extends Component {
+class App extends React.Component {
   render() {
     let taskRef = firebase.database().ref("tasks");
     return (
